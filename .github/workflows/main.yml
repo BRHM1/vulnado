@@ -33,7 +33,7 @@ jobs:
           NEXUS_PASS: ${{ secrets.NEXUS_PASSWORD }}
           NEXUS_URL: ${{ secrets.NEXUS_URL }}
         run: |
-          echo "Uploading artifact to Nexus..."
+          echo "Uploading artifact to Nexus Repo..."
           curl -v -u "$NEXUS_USER:$NEXUS_PASS" \
             --upload-file target/vulnado-0.0.1-SNAPSHOT.jar \
             "$NEXUS_URL/repository/maven-snapshots/com/scalesec/vulnado/0.0.1-SNAPSHOT/vulnado-0.0.1-SNAPSHOT.jar"

@@ -29,14 +29,15 @@ jobs:
       # 4. Upload the built JAR to Nexus Repository
       - name: Upload Artifact to Nexus Repository
         env:
-          NEXUS_USER: ${{ secrets.NEXUS_USERNAME }}
-          NEXUS_PASS: ${{ secrets.NEXUS_PASSWORD }}
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
           NEXUS_URL: ${{ secrets.NEXUS_URL }}
         run: |
-          echo "Uploading artifact to Nexus Repo..."
-          curl -v -u "$NEXUS_USER:$NEXUS_PASS" \
-            --upload-file target/vulnado-0.0.1-SNAPSHOT.jar \
-            "$NEXUS_URL/repository/maven-snapshots/com/scalesec/vulnado/0.0.1-SNAPSHOT/vulnado-0.0.1-SNAPSHOT.jar"
+          mvn -B deploy -DskipTests \
+            -DaltDeploymentRepository=nexus::default::$NEXUS_URL/repository/maven-snapshots/ \
+            -Dnexus.username=$NEXUS_USERNAME \
+            -Dnexus.password=$NEXUS_PASSWORD
+
 
       # 5. Run Sonatype IQ Policy Evaluation using official GitHub Action
       - name: Sonatype IQ Policy Evaluation

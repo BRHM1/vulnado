@@ -45,7 +45,7 @@ jobs:
           iq-server-url: ${{ secrets.IQ_SERVER_URL }}
           username: ${{ secrets.IQ_USERNAME }}
           password: ${{ secrets.IQ_PASSWORD }}
-          application-id: vulnado
+          application-id: 2
           scan-targets: target/vulnado-0.0.1-SNAPSHOT.jar
           stage: build
           fail-on-policy-warnings: true
